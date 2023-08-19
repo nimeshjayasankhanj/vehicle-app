@@ -27,7 +27,7 @@ export const BiddingsCard = ({ value }: BiddingsCardProps) => {
             fontWeight: "bold",
           }}
         >
-          {value.name}
+          {value.name} {value.brand} {value.manufactureYear}
         </Typography>
         <Typography
           gutterBottom

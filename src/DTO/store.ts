@@ -29,6 +29,8 @@ export type Bid = {
   price: number;
   bid_price: number;
   description: string;
+  brand: string;
+  manufactureYear: string;
 };
 
 export const VehicleObject = {

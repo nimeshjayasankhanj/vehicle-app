@@ -70,6 +70,8 @@ const ViewDetails = () => {
       price: data.details.price,
       bid_price: 0,
       description: data.details.description,
+      manufactureYear: data.details.manufactureYear,
+      brand: data.details.brand,
     };
     setVehicle(newVehicleObject);
     setPrice(data.details.price);
