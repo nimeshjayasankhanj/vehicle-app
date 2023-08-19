@@ -35,6 +35,19 @@ export const VehicleCard = ({
           }
           title={"image"}
         />
+        <Paper
+          elevation={0}
+          style={{
+            width: "40px",
+            height: "40px",
+            backgroundColor: value.details.color,
+            borderRadius: "50%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            boxShadow: "0px 0px 5px rgba(0, 0, 0, 0.3)",
+          }}
+        />
         <CardContent>
           <Typography
             gutterBottom
