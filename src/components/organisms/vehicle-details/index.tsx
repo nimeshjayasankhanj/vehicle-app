@@ -35,7 +35,7 @@ export const VehicleDetails = ({ value, showBidModal }: vehicleCardProps) => {
                 fontWeight: "bold",
               }}
             >
-              {value.name}
+              {value.name} {value.details.brand} {value.details.manufactureYear}
             </Typography>
             <Typography
               gutterBottom

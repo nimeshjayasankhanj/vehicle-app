@@ -6,6 +6,7 @@ import {
   Typography,
   CardActionArea,
   CardActions,
+  Paper,
 } from "@mui/material";
 
 import { Button, Card } from "src/components/atoms";
@@ -47,8 +48,9 @@ export const VehicleCard = ({
               fontWeight: "bold",
             }}
           >
-            {value.name}
+            {value.name} {value.details.brand} {value.details.manufactureYear}
           </Typography>
+
           <Typography
             gutterBottom
             component="div"
