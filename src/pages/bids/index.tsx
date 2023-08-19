@@ -1,6 +1,8 @@
-import { Chip, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+
+import { Chip, Grid } from "@mui/material";
+
 import { Bid } from "src/DTO/store";
 import { Empty } from "src/components/molecules";
 import { BiddingsCard } from "src/components/organisms";

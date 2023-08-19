@@ -11,11 +11,7 @@ export const BiddingsCard = ({ value }: BiddingsCardProps) => {
     <Card>
       <CardMedia
         sx={{ height: 240 }}
-        image={
-          value.image === ""
-            ? "https://stmartinblue.com/images/cars/default_car.jpg"
-            : value.image
-        }
+        image={value.image === "" ? process.env.REACT_APP_IMAGE : value.image}
         title={"title"}
       />
       <CardContent>
@@ -30,7 +26,6 @@ export const BiddingsCard = ({ value }: BiddingsCardProps) => {
             textAlign: "center",
             fontWeight: "bold",
           }}
-          aria-label="cocktail-name"
         >
           {value.name}
         </Typography>
@@ -44,10 +39,9 @@ export const BiddingsCard = ({ value }: BiddingsCardProps) => {
             textAlign: "center",
             fontWeight: "bold",
           }}
-          aria-label="cocktail-name"
         >
           {value.currency}:{" "}
-          {value.price.toLocaleString(undefined, {
+          {value.bid_price.toLocaleString(undefined, {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           })}

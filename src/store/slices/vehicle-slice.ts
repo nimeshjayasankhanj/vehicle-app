@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Bid, VehicleSlice } from "src/DTO/store";
+import { Bid, VehicleObject, VehicleSlice } from "src/DTO/store";
 import { getSingleVehicle, vehicleService } from "src/services/vehicle-service";
 
 const initialState: VehicleSlice = {
@@ -8,23 +8,11 @@ const initialState: VehicleSlice = {
   isLoading: false,
   isError: false,
   bids: [],
-  vehicle: {
-    id: "",
-    name: "",
-    details: {
-      currency: "",
-      price: 0,
-      color: "string",
-      brand: "string",
-      manufactureYear: "",
-      image: "",
-      description: "",
-    },
-  },
+  vehicle: VehicleObject,
 };
 
 const vehicleSlice = createSlice({
-  name: "vehicle",
+  name: "vehicles",
   initialState,
   reducers: {
     markAsBid: (state, action) => {

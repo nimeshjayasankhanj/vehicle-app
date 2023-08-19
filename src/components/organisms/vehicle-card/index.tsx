@@ -5,6 +5,7 @@ import {
   CardContent,
   Typography,
   CardActionArea,
+  CardActions,
 } from "@mui/material";
 
 import { Button, Card } from "src/components/atoms";
@@ -28,10 +29,10 @@ export const VehicleCard = ({
           sx={{ height: 240 }}
           image={
             value.details.image === ""
-              ? "https://stmartinblue.com/images/cars/default_car.jpg"
+              ? process.env.REACT_APP_IMAGE
               : value.details.image
           }
-          title={"title"}
+          title={"image"}
         />
         <CardContent>
           <Typography
@@ -45,7 +46,6 @@ export const VehicleCard = ({
               textAlign: "center",
               fontWeight: "bold",
             }}
-            aria-label="cocktail-name"
           >
             {value.name}
           </Typography>
@@ -59,7 +59,6 @@ export const VehicleCard = ({
               textAlign: "center",
               fontWeight: "bold",
             }}
-            aria-label="cocktail-name"
           >
             {value.details.currency}:{" "}
             {value.details.price.toLocaleString(undefined, {
@@ -86,18 +85,19 @@ export const VehicleCard = ({
               }}
             />
           </Box>
-
-          <Button
-            style={{ marginTop: "20px" }}
-            fullWidth={true}
-            onClick={() => showBidModal(value)}
-          >
-            <LocalAtmIcon />
-            {""}
-            Add Bid
-          </Button>
         </CardContent>
       </CardActionArea>
+      <CardActions>
+        <Button
+          style={{ marginTop: "20px" }}
+          fullWidth={true}
+          onClick={() => showBidModal(value)}
+        >
+          <LocalAtmIcon />
+          {""}
+          Create Bidding
+        </Button>
+      </CardActions>
     </Card>
   );
 };

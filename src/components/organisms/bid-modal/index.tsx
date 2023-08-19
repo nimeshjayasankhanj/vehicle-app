@@ -9,6 +9,7 @@ interface BidModalProps {
   errors: any;
   open: boolean;
   handleClose: () => void;
+  watch: Function;
 }
 
 export const BidModal = ({
@@ -17,7 +18,10 @@ export const BidModal = ({
   errors,
   open,
   handleClose,
+  watch,
 }: BidModalProps) => {
+  const bidValue = watch("bid_price");
+
   return (
     <Modal open={open} handleClose={handleClose}>
       <Box sx={{ pt: 2 }}>
@@ -28,7 +32,12 @@ export const BidModal = ({
             type="number"
             name="bid_price"
           />
-          <Button type="submit" style={{ marginTop: "20px" }} fullWidth={true}>
+          <Button
+            type="submit"
+            style={{ marginTop: "20px" }}
+            fullWidth={true}
+            disabled={bidValue <= 0 ? true : false}
+          >
             Submit
           </Button>
         </form>

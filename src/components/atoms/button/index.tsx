@@ -18,6 +18,7 @@ interface ButtonProps {
   onClick?: () => void;
   type?: "submit" | "reset" | "button" | undefined;
   fullWidth?: boolean;
+  disabled?: boolean;
 }
 
 export const Button = ({
@@ -35,6 +36,7 @@ export const Button = ({
   onClick,
   type = "button",
   fullWidth = false,
+  disabled = false,
 }: ButtonProps) => {
   const CustomButton = styled(MaterialButton)({
     fontSize,
@@ -59,6 +61,7 @@ export const Button = ({
       onClick={onClick}
       type={type}
       fullWidth={fullWidth}
+      disabled={disabled}
     >
       {children}
     </CustomButton>

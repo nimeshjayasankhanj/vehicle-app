@@ -30,3 +30,17 @@ export type Bid = {
   bid_price: number;
   description: string;
 };
+
+export const VehicleObject = {
+  id: "",
+  name: "",
+  details: {
+    currency: "",
+    price: 0,
+    color: "",
+    brand: "",
+    manufactureYear: "",
+    image: "",
+    description: "",
+  },
+};

@@ -1,13 +1,15 @@
-import { VehicleDetails } from "src/components/organisms";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { VehicleDetails } from "src/components/organisms";
 import { Vehicle } from "src/DTO/store";
 import { Error, Loader } from "src/components/molecules";
 import { BidModal } from "src/components/organisms";
 import { getSingleVehicle } from "src/services/vehicle-service";
 import { AppDispatch, RootStore } from "src/store";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { BidSchema } from "src/schema/BidSchema";
 import { BIDPrice } from "src/DTO/bid";
 import { toast } from "react-toastify";
@@ -38,6 +40,7 @@ const ViewDetails = () => {
     formState: { errors },
     control,
     reset,
+    watch,
   } = useForm({
     defaultValues: {
       bid_price: 0,
@@ -94,6 +97,7 @@ const ViewDetails = () => {
           errors={errors}
           open={isShowModal}
           handleClose={handleClose}
+          watch={watch}
         />
       )}
     </>

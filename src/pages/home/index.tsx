@@ -1,18 +1,27 @@
-import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+
+import { Grid } from "@mui/material";
+import { yupResolver } from "@hookform/resolvers/yup";
+import YoutubeSearchedForIcon from "@mui/icons-material/YoutubeSearchedFor";
+
 import { Vehicle } from "src/DTO/store";
 import { Empty, Error, Loader } from "src/components/molecules";
-import { BidModal, Categories, VehicleCard } from "src/components/organisms";
+import {
+  BidModal,
+  Categories,
+  Pagination,
+  VehicleCard,
+} from "src/components/organisms";
 import { vehicleService } from "src/services/vehicle-service";
 import { AppDispatch, RootStore } from "src/store";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { BidSchema } from "src/schema/BidSchema";
 import { BIDPrice } from "src/DTO/bid";
 import { toast } from "react-toastify";
 import { markAsBid } from "src/store/slices/vehicle-slice";
 import { useNavigate } from "react-router-dom";
+import { Button } from "src/components/atoms";
 
 const Home = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -20,14 +29,19 @@ const Home = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [vehicle, setVehicle] = useState({});
   const [price, setPrice] = useState<number>(0);
+  const [selectedPage, setSelectedPage] = useState<number>(1);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
     vehicleLists();
-  }, [search]);
+  }, [search, selectedPage]);
 
   const vehicleLists = () => {
-    dispatch(vehicleService(search));
+    const params = {
+      search,
+      selectedPage,
+    };
+    dispatch(vehicleService(params));
   };
 
   const { data, isLoading, isError } = useSelector(
@@ -39,6 +53,7 @@ const Home = () => {
     formState: { errors },
     control,
     reset,
+    watch,
   } = useForm({
     defaultValues: {
       bid_price: 0,
@@ -85,6 +100,14 @@ const Home = () => {
     navigate(`/vehicle-detail/${data.id}`);
   };
 
+  const changePage = (event: React.ChangeEvent<unknown>, value: number) => {
+    setSelectedPage(value);
+  };
+
+  const clearSearch = () => {
+    setSearch("");
+  };
+
   if (isLoading) {
     return <Loader />;
   }
@@ -97,6 +120,16 @@ const Home = () => {
       <Grid container pb={3}>
         <Grid item xs={12} md={4} sm={4}>
           <Categories handleChange={handleChange} value={search} />
+        </Grid>
+        <Grid item xs={12} md={8} sm={8}>
+          <Button
+            style={{ float: "right" }}
+            disabled={search === "" ? true : false}
+            onClick={clearSearch}
+          >
+            <YoutubeSearchedForIcon />
+            Clear Search
+          </Button>
         </Grid>
       </Grid>
       <Grid container spacing={10}>
@@ -123,9 +156,17 @@ const Home = () => {
             errors={errors}
             open={isShowModal}
             handleClose={handleClose}
+            watch={watch}
           />
         )}
       </Grid>
+      {data.length !== 0 && search === "" && (
+        <Grid container pt={3}>
+          <Grid item xs={12} md={12} sm={12}>
+            <Pagination changePage={changePage} selectedPage={selectedPage} />
+          </Grid>
+        </Grid>
+      )}
     </>
   );
 };

@@ -4,3 +4,4 @@ export { BidModal } from "./bid-modal";
 export { BiddingsCard } from "./biddings-card";
 export { Categories } from "./categories-box";
 export { VehicleDetails } from "./vehicle-details";
+export { Pagination } from "./pagination";
