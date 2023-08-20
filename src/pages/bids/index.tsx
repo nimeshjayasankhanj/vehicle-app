@@ -12,14 +12,6 @@ const Biddings = () => {
   const { bids } = useSelector((state: RootStore) => state.vehicles);
   const [totalPrice, TotalPrice] = useState(0);
 
-  useEffect(() => {
-    total();
-  }, [bids]);
-
-  if (bids.length === 0) {
-    return <Empty />;
-  }
-
   const total = () => {
     let calculatedTotal = 0;
     for (const item of bids) {
@@ -27,6 +19,14 @@ const Biddings = () => {
     }
     TotalPrice(calculatedTotal);
   };
+
+  useEffect(() => {
+    total();
+  }, [bids]);
+
+  if (bids.length === 0) {
+    return <Empty />;
+  }
 
   return (
     <>
